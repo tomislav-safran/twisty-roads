@@ -1,0 +1,41 @@
+#container {
+    display: flex;
+    height: 100vh;
+}
+
+#map {
+    flex: 1;
+    height: 100%;
+}
+
+#sidebar {
+    width: 350px;
+    padding: 20px;
+}
+
+.weights-grid {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 20px;
+    row-gap: 5px;
+}
+
+.weight-input {
+    width: 100%;
+}
+
+button {
+    margin: 0;
+    padding: 8px;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 50px;
+}
+
+p {
+    margin: 0;
+}
