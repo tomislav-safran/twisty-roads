@@ -1,4 +1,4 @@
-function getRadiusWeight(radius, radiiWeights = [[30, 2], [60, 1.6], [100, 1.3], [175, 1]]) {
+function getRadiusWeight(radius) {
     for (let i = 0; i < radiiWeights.length; i++) {
         const [minRadius, weight] = radiiWeights[i];
         if (radius <= minRadius) return weight;

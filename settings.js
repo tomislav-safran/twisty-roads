@@ -1,5 +1,6 @@
 function initSettings() {
     refreshWeights();
+    refreshColorBands();
     refreshHighwayTypes();
 
     twistinessFilter = document.getElementById("twistinessSlider").value;
@@ -18,12 +19,26 @@ function refreshWeights() {
     radiiWeights = [[radiusInput1.value, weightInput1.value], [radiusInput2.value, weightInput2.value], [radiusInput3.value, weightInput3.value], [radiusInput4.value, weightInput4.value]];
 }
 
+function refreshColorBands() {
+    const twistiness1 = document.getElementById("twistiness1");
+    const twistiness2 = document.getElementById("twistiness2");
+    const twistiness3 = document.getElementById("twistiness3");
+    const twistiness4 = document.getElementById("twistiness4");
+    const color1 = document.getElementById("color1");
+    const color2 = document.getElementById("color2");
+    const color3 = document.getElementById("color3");
+    const color4 = document.getElementById("color4");
+
+    colorBands = [[twistiness4.value, color4.value], [twistiness3.value, color3.value], [twistiness2.value, color2.value], [twistiness1.value, color1.value]];
+}
+
 function refreshHighwayTypes() {
     highways = [];
 
     if (document.getElementById("primaryHighway").checked) highways.push("primary");
     if (document.getElementById("secondaryHighway").checked) highways.push("secondary");
     if (document.getElementById("tertiaryHighway").checked) highways.push("tertiary");
+    if (document.getElementById("residential").checked) highways.push("residential");
     if (document.getElementById("track").checked) highways.push("track");
     if (document.getElementById("unclassified").checked) highways.push("unclassified");
 }
@@ -46,6 +61,12 @@ function initInteractions() {
         refreshRoads();
     };
 
+    const saveColorBands = document.getElementById("saveColors");
+    saveColorBands.onclick = async function() {
+        refreshColorBands();
+        refreshRoads();
+    }
+
     const radiusSlider = document.getElementById("radiusSlider");
     const radiusSliderValue = document.getElementById("radiusSliderValue");
     radiusSlider.addEventListener('input', (event) => {
@@ -53,7 +74,7 @@ function initInteractions() {
 
         radiusSliderValue.textContent = event.target.value;
         radius = value;
-        refreshCircle();
+        refreshSearchRadius();
     })
 
     const twistinessSlider = document.getElementById("twistinessSlider");

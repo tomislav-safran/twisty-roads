@@ -11,9 +11,10 @@
 #sidebar {
     width: 350px;
     padding: 20px;
+    overflow-y: auto;
 }
 
-.weights-grid {
+.grid {
     display: grid;
     grid-template-columns: auto auto;
     column-gap: 20px;
