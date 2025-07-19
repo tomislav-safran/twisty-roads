@@ -87,4 +87,12 @@ function initInteractions() {
         twistinessFilter = value;
         refreshRoads();
     });
+
+    const collapseExpand = document.getElementById("collapseExpand");
+    const collapseIcon = document.getElementById("collapseIcon");
+    collapseExpand.onclick = function() {
+        document.getElementById("inputSection").classList.toggle("collapsed");
+        collapseIcon.classList.toggle("rotate180");
+        map.invalidateSize();
+    }
 }

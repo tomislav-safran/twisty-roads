@@ -4,6 +4,7 @@
     <title>Twisty roads</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css"/>
 </head>
 <body style="margin: 0;">
@@ -25,85 +26,90 @@
     <div id="map"></div>
 
     <div id="sidebar">
-        <div class="input-container">
-            <label for="radiusSlider">Search radius: <span id="radiusSliderValue">10000</span> m</label>
-            <input type="range" id="radiusSlider" min="0" max="20000" step="1" value="10000">
+        <div class="collapse-expand" id="collapseExpand">
+            <i class="fas fa-chevron-right" id="collapseIcon"></i>
+        </div>
+        <div class="input-section" id="inputSection">
+            <div class="input-container">
+                <label for="radiusSlider">Search radius: <span id="radiusSliderValue">10000</span> m</label>
+                <input type="range" id="radiusSlider" min="0" max="20000" step="1" value="10000">
 
-            <p>Road Types:</p>
-            <div class="grid">
-                <div>
-                    <input type="checkbox" id="primaryHighway" name="highway1" value="primary" checked>
-                    <label for="primaryHighway"> Primary </label>
+                <p>Road Types:</p>
+                <div class="grid">
+                    <div>
+                        <input type="checkbox" id="primaryHighway" name="highway1" value="primary" checked>
+                        <label for="primaryHighway"> Primary </label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="secondaryHighway" name="highway2" value="secondary" checked>
+                        <label for="secondaryHighway"> Secondary </label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="tertiaryHighway" name="highway3" value="tertiary" checked>
+                        <label for="tertiaryHighway"> Tertiary </label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="residential" name="residential" value="residential">
+                        <label for="residential"> residential </label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="track" name="track" value="track">
+                        <label for="track"> Track </label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="unclassified" name="unclassified" value="unclassified">
+                        <label for="unclassified"> Unclassified </label>
+                    </div>
                 </div>
-                <div>
-                    <input type="checkbox" id="secondaryHighway" name="highway2" value="secondary" checked>
-                    <label for="secondaryHighway"> Secondary </label>
-                </div>
-                <div>
-                    <input type="checkbox" id="tertiaryHighway" name="highway3" value="tertiary" checked>
-                    <label for="tertiaryHighway"> Tertiary </label>
-                </div>
-                <div>
-                    <input type="checkbox" id="residential" name="residential" value="residential">
-                    <label for="residential"> residential </label>
-                </div>
-                <div>
-                    <input type="checkbox" id="track" name="track" value="track">
-                    <label for="track"> Track </label>
-                </div>
-                <div>
-                    <input type="checkbox" id="unclassified" name="unclassified" value="unclassified">
-                    <label for="unclassified"> Unclassified </label>
-                </div>
+
+                <button id="saveRadius">Search</button>
             </div>
 
-            <button id="saveRadius">Search</button>
-        </div>
-
-        <div class="input-container">
-            <label for="twistinessSlider">Min twistiness: <span id="twistinessValue">300</span></label>
-            <input type="range" id="twistinessSlider" min="0" max="1000" step="5" value="300">
-        </div>
-
-        <div class="input-container">
-            <p>Road colors:</p>
-            <div class="grid">
-                <label>Twistiness:</label>
-                <label>Color:</label>
-
-                <input type="number" id="twistiness1" class="" value="180">
-                <input type="color" id="color1" class="" value="#fec13e">
-
-                <input type="number" id="twistiness2" class="" value="600">
-                <input type="color" id="color2" class="" value="#ff9999">
-
-                <input type="number" id="twistiness3" class="" value="1800">
-                <input type="color" id="color3" class="" value="#ff6666">
-
-                <input type="number" id="twistiness4" class="" value="6000">
-                <input type="color" id="color4" class="" value="#ff0000">
+            <div class="input-container">
+                <label for="twistinessSlider">Min twistiness: <span id="twistinessValue">300</span></label>
+                <input type="range" id="twistinessSlider" min="0" max="1000" step="5" value="300">
             </div>
-            <button id="saveColors">Update colors</button>
-        </div>
 
-        <div class="input-container">
-            <p>Turn Radius Weights:</p>
-            <div class="grid">
-                <label> Radius: </label>
-                <label> Weight: </label>
-                <input type="number" id="radius1" class="weight-input" value="30">
-                <input type="number" id="weight1" class="weight-input" value="2">
+            <div class="input-container">
+                <p>Road colors:</p>
+                <div class="grid">
+                    <label>Twistiness:</label>
+                    <label>Color:</label>
 
-                <input type="number" id="radius2" class="weight-input" value="60">
-                <input type="number" id="weight2" class="weight-input" value="1.6">
+                    <input type="number" id="twistiness1" class="" value="180">
+                    <input type="color" id="color1" class="" value="#fec13e">
 
-                <input type="number" id="radius3" class="weight-input" value="100">
-                <input type="number" id="weight3" class="weight-input" value="1.3">
+                    <input type="number" id="twistiness2" class="" value="600">
+                    <input type="color" id="color2" class="" value="#ff9999">
 
-                <input type="number" id="radius4" class="weight-input" value="175">
-                <input type="number" id="weight4" class="weight-input" value="1">
+                    <input type="number" id="twistiness3" class="" value="1800">
+                    <input type="color" id="color3" class="" value="#ff6666">
+
+                    <input type="number" id="twistiness4" class="" value="6000">
+                    <input type="color" id="color4" class="" value="#ff0000">
+                </div>
+                <button id="saveColors">Update colors</button>
             </div>
-            <button id="saveWeights">Update weights</button>
+
+            <div class="input-container">
+                <p>Turn Radius Weights:</p>
+                <div class="grid">
+                    <label> Radius: </label>
+                    <label> Weight: </label>
+                    <input type="number" id="radius1" class="weight-input" value="30">
+                    <input type="number" id="weight1" class="weight-input" value="2">
+
+                    <input type="number" id="radius2" class="weight-input" value="60">
+                    <input type="number" id="weight2" class="weight-input" value="1.6">
+
+                    <input type="number" id="radius3" class="weight-input" value="100">
+                    <input type="number" id="weight3" class="weight-input" value="1.3">
+
+                    <input type="number" id="radius4" class="weight-input" value="175">
+                    <input type="number" id="weight4" class="weight-input" value="1">
+                </div>
+                <button id="saveWeights">Update weights</button>
+            </div>
         </div>
     </div>
 </div>
