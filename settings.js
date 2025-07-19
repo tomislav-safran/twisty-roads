@@ -93,6 +93,10 @@ function initInteractions() {
     collapseExpand.onclick = function() {
         document.getElementById("inputSection").classList.toggle("collapsed");
         collapseIcon.classList.toggle("rotate180");
-        map.invalidateSize();
+
+        // wait for the collapse animation to finish before loading the map
+        setTimeout(() => {
+            map.invalidateSize();
+        }, 250);
     }
 }
