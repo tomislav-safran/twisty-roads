@@ -55,7 +55,6 @@ function refreshRoads() {
     const joinedRoads = joinConnectedWays(allRoads);
     const ratedRoads = getRatedRoads(joinedRoads, radiiWeights);
 
-    //const ratedRoads = getRatedRoads(allRoads, radiiWeights);
     const maxRating = ratedRoads.reduce((max, item) => Math.max(max, item.roadRating), 0);
     const minRating = ratedRoads.reduce((min, item) => Math.min(min, item.roadRating), maxRating);
     console.log(maxRating, minRating);
@@ -64,7 +63,7 @@ function refreshRoads() {
     drawnRoads.forEach(polyline => {
         map.removeLayer(polyline);
     });
-    drawnRoads = []; // Clear the array
+    drawnRoads = [];
 
     // Draw new roads
     ratedRoads
