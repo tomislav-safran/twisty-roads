@@ -111,6 +111,8 @@ button:focus-visible {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    box-shadow: -4px 0 5px lightgray;
+    z-index: 1000;
 }
 
 .collapse-expand:hover i {
